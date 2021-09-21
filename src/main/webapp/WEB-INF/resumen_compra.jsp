@@ -14,22 +14,19 @@
 			<table>
 				<thead>
 					<tr>
-						<th>#</th>
 						<th>Nombre</th>
-						<th>Codigo</th>
 						<th>ValorBase</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="producto" items="${carrito}" >
 					<tr>
-						<td><c:out value="${producto.id}" /> </td>
-						<td><c:out value="${producto.nombre}" /> </td>
-						<td><c:out value="${producto.codigo}" /> </td>
-						<td><c:out value="${producto.valorBase}" /> </td>
+						<td><c:out value="${producto.key}" /> </td> <!-- key es el primer valor -->
+						<td><c:out value="${producto.value}" /> </td> <!--value es el segundo valor -->
 						<td>
 							<form action="/producto/eliminarCarro" method="POST">
-								<input type="hidden" name="id" value="<c:out value="${producto.id}" />" >
+								<input type="hidden" name="nombre" value="<c:out value="${producto.key}" />" >
+								<input type="hidden" name="valor Base" value="<c:out value="${producto.value}" />" >
 								<input type="submit" value="Eliminar">
 							</form>
 						</td>
@@ -37,8 +34,13 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<hr>
+			<br>
 			
-			<h3> <c:out value="${total}" /> </h3>
+			<h3> Precio Total: $<c:out value="${Precio_Total}" />.00 </h3>
+			<hr>
+			<br>	
+			<a href="/producto">Volver</a>
 		</div>
 
 </body>

@@ -22,6 +22,6 @@
         </p>
         <input type="submit" value="Login!"/>
     </form>  
-    <a href="/registrar"> Registrarse</a>  
+    <a href="/registro"> Registrarse</a>  
 </body>
 </html>

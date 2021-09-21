@@ -14,13 +14,10 @@
                 <a class="nav-link active" aria-current="page" href="#">Active</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="/producto">Productos </a>   
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
+                <a class="nav-link" href="/logout"> Log Out</a>
             </li>
         </ul>
         <!-- Option 1: Bootstrap Bundle with Popper -->

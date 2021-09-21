@@ -16,8 +16,7 @@ public class UserService {
 	private UserRepository userRepository;
 
 	public void save(@Valid User user) {
-		// hash password
-        String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()); //encripcion BCrypt
         user.setPassword(hashed);
 		userRepository.save(user);
 	}

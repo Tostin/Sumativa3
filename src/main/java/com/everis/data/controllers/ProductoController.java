@@ -1,7 +1,9 @@
 package com.everis.data.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -22,7 +24,9 @@ import com.everis.data.services.ProductoService;
 public class ProductoController {
 	
 	private Integer suma = 0;
-	public List<Producto> carrito = new ArrayList<Producto>();
+	//private int sumPos = 0; por idea de guardar por posicion en la lista carrito
+	//private List<Producto> carrito = new ArrayList<Producto>(); posible lista para historial de compra
+	Map<String, Integer> arrayProductos = new HashMap<String, Integer>(); //Array bidimensional al no resultarme listas por ningún lado 
 	
 	
 	@Autowired
@@ -98,41 +102,51 @@ public class ProductoController {
 
 	
 	@RequestMapping(value= "/agregarCarro", method = RequestMethod.POST)
-	public String agregarCarro(Model model, @RequestParam("id") Long id) {
+	public String agregarCarro(Model model, @RequestParam("nombre") String nombresito, 
+											@RequestParam("valor Base") Integer valorB) {
 		
-		Producto prod = pS.buscarproductito(id);
+		arrayProductos.put(nombresito, valorB);
+		suma += valorB;
+		/*
+		carrito.add(pS.buscarproductito(id));
+		suma += pS.buscarproductito(id).getValorBase();
+		 */
 		
-		carrito.add(prod);
-		suma += prod.getValorBase(); 
-		System.out.println("precio " + suma);
-		model.addAttribute("total", suma);
-		model.addAttribute("carrito", carrito);
-		
-		
-		
+		model.addAttribute("Precio_Total", suma);
+		model.addAttribute("carrito", arrayProductos);
+		System.out.println("Precio: " + suma +" Nombre: " + nombresito);
 		return "resumen_compra.jsp";
 	}
 	
 	
 	@RequestMapping(value= "/eliminarCarro", method = RequestMethod.POST)
-	public String eliminarCarro(Model model, @RequestParam("id") Long id) {
-		model.addAttribute("total", suma);
-		model.addAttribute("carrito", carrito);
+	public String eliminarCarro(Model model, @RequestParam("nombre") String nombresito,
+											@RequestParam("valor Base") Integer valorB) {
+
+
+		arrayProductos.remove(nombresito);
+		suma -= valorB;
+		model.addAttribute("Precio_Total", suma);
+		model.addAttribute("carrito", arrayProductos);
+		System.out.println(" nombre: "+ nombresito +" de precio " + valorB );
+	
+
+		/* intento 3
+		for (Producto prod: carrito) {
+			
+			if(prod.getId() == id){	
+				suma -= prod.getValorBase();
+				carrito.remove(sumPos);	
+				
+			}
+			sumPos ++;
+		}  */
+		// intento 2
+		//Producto prod2 = pS.buscarproductito(id);
+		//int index = carrito.indexOf(pS.buscarproductito(id));
 		
-		System.out.println(" lista" + carrito);
-		Producto prod = pS.buscarproductito(id);
-		int index = carrito.indexOf(prod);
 		
-		
-		if(index != -1) {
-			carrito.remove(index);
-			suma -= prod.getValorBase(); 
-		} else if(index == -1) {
-			System.out.println("-1");
-		}
-		
-		
-		/*
+		/* intento 1
 		if(carrito.remove(prod)) {
 			System.out.println("hola");
 			
@@ -146,6 +160,8 @@ public class ProductoController {
 		
 		return "resumen_compra.jsp";
 	}
+	
+	
 	
 	
 	

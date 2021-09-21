@@ -27,7 +27,7 @@
             <form:password path="password"/>
         </p>
         <p>
-            <form:label path="passwordConfirmation">ConfirmaciÃ³n Password:</form:label>
+            <form:label path="passwordConfirmation">Confirme Password:</form:label>
             <form:password path="passwordConfirmation"/>
         </p>
         <input type="submit" value="Registrate!"/>

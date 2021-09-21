@@ -18,22 +18,30 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	
 	@RequestMapping("/login")
 	public String login() {
 		return "login.jsp";
 	}
 	
+	@RequestMapping("/registro")
+	public String registro(@ModelAttribute("user") User user) {
+		return "registro.jsp";
+	}
+	
 	@RequestMapping("/ingresar")
 	public String ingresar(@RequestParam("email") String email,
 			@RequestParam("password") String password,
-			HttpSession session) {
+			HttpSession session
+			) {
 		boolean exiteUsuario = userService.validarUser(email, password);
 		if(exiteUsuario) {
 			User user = userService.findByEmail(email);
 			//guardando un elemento en session
 			session.setAttribute("userId", user.getId());
-			return "producto.jsp";
+			return "home.jsp";
 		}
+		
 		return "redirect:/login";
 	}
 	
@@ -41,7 +49,7 @@ public class UserController {
 	public String registrar(@Valid @ModelAttribute("user") User user) {
 		//llamar a las validaciones
 		userService.save(user);
-		return "registro.jsp";
+		return "login.jsp";
 	}
 	
 	@RequestMapping("/home")
@@ -51,6 +59,7 @@ public class UserController {
 			return "home.jsp";
 		}
 		return "redirect:/login";
+		
 	}
 	
 	@RequestMapping("/logout")
@@ -62,4 +71,6 @@ public class UserController {
 		return "redirect:/login";
 	}
 	
+	
+
 }

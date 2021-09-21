@@ -52,7 +52,8 @@
 								<input type="submit" value="Eliminar">
 							</form>
 							<form action="/producto/agregarCarro" method="POST">
-								<input type="hidden" name="id" value="<c:out value="${producto.id}" />" >
+								<input type="hidden" name="nombre" value="<c:out value="${producto.nombre}" />" >
+								<input type="hidden" name="valor Base" value="<c:out value="${producto.valorBase}" />" >
 								<input type="submit" value="Agregar a Carro">
 							</form>
 						</td>
@@ -60,6 +61,9 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<br>
+			<hr>
+			<a href="/home">Volver a Home</a>
 		</div>
 </body>
 </html>

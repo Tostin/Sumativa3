@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,13 +16,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "ventas")
 public class Venta {
-	
-	
+
+	//solo para guardar un simple registro del total de la compra
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String valorTotal;
- //nombre de la persona a cargo de realizar la venta
+	private String valorTotal; 
 	
 	@Column(updatable=false)
 	@CreationTimestamp

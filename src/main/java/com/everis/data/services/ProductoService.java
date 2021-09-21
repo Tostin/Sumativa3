@@ -60,6 +60,7 @@ public class ProductoService {
 
 	public void insertarProducto(@Valid Producto productito) {
 		pR.save(productito);
+
 		
 	}
 	
